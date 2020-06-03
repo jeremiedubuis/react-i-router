@@ -40,6 +40,11 @@ The Router component needs a domain and currentUrl prop to parse the URL. This a
   }
  ```
 
+### Router.set404(render404: Function)
+> Sets the 404 page rendering method
+```jsx
+Router.set404(({ url, queryParams }) => <div>{url} not found</div>)
+```
 ## SSR
 
 When rendering your App serverside you should use request parameters to populate the router's props.
