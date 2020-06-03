@@ -47,7 +47,7 @@ export class Router {
 
     parseUrl(url: string = '/'): IRouteMatch {
         const queryParams = urlToQueryParams(url);
-        const path = url.replace(/^https?:\/\//, '').replace(this.domain, '');
+        const path = url.split('?').shift().replace(/^https?:\/\//, '').replace(this.domain, '');
         const {route, params} = this.parsePath(path);
         return {
             url,
@@ -62,7 +62,6 @@ export class Router {
     parsePath(path: string): IPathMatch {
 
         const pathParts = path.split('/');
-
         for (let route in this.routes) {
 
             const routeParts = route.split('/');

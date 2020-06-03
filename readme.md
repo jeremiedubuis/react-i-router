@@ -7,7 +7,7 @@ $ npm install --save react-i-router
   
 ## Usage  
 ```jsx  
- <Router domain={window.location.host} currentUrl={window.location.pathname} routes={{ "/": () => <div> Home </div> }}/>
+ <Router domain={window.location.host} currentUrl={window.location.href} routes={{ "/": () => <div> Home </div> }}/>
  ```  
   
 The Router component needs a domain and currentUrl prop to parse the URL. This allows the library to work for SSR as well as client side rendering.  
