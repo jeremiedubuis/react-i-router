@@ -45,6 +45,15 @@ The Router component needs a domain and currentUrl prop to parse the URL. This a
 ```jsx
 Router.set404(({ url, queryParams }) => <div>{url} not found</div>)
 ```
+
+## Components
+
+### Link
+```
+    <Link href="/route">My internal link</Link>;
+    <Link href="https://github.com/jeremiedubuis/react-i-router" external>My external link</Link>;
+```
+
 ## SSR
 
 When rendering your App serverside you should use request parameters to populate the router's props.

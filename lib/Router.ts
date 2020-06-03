@@ -1,7 +1,11 @@
 import {urlToQueryParams} from './helpers/urlToQueryParams';
 
+export interface IRouteObject {
+    render: Function
+}
+
 export interface IRoutes {
-    [route: string]: Function
+    [route: string]: Function | IRouteObject
 }
 
 interface IPathMatch {
@@ -13,7 +17,7 @@ export interface IRouteMatch {
     url: string,
     currentPath: string,
     route: string,
-    renderFunction: Function,
+    match: Function | IRouteObject,
     params: object,
     queryParams: object
 }
@@ -49,7 +53,7 @@ export class Router {
             url,
             currentPath: path,
             route,
-            renderFunction: this.routes[route],
+            match: this.routes[route],
             params,
             queryParams
         };

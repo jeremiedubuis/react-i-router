@@ -47,7 +47,7 @@ export class Router extends React.Component<IRouterProps, IRouterState> {
         render404 = _render404;
     }
 
-    static goto(url: string, silent: boolean, replace: boolean) {
+    static goto(url: string, silent: boolean = true, replace: boolean = false) {
         router.goto(url, silent, replace);
     }
 
@@ -67,8 +67,10 @@ export class Router extends React.Component<IRouterProps, IRouterState> {
 
     render() {
 
-        if (this.state.route.renderFunction) {
-            return this.state.route.renderFunction(this.state.route);
+        if (this.state.route.match) {
+            return typeof this.state.route.match === 'function'
+            ? this.state.route.match(this.state.route)
+            : this.state.route.match.render(this.state.route);
         }
 
         return render404(this.state.route);
