@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c rollup.config.js",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "start": "nodemon public/server.js",
     "watch": "rollup -c rollup.config.js -w"
   },
