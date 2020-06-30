@@ -52,9 +52,9 @@ export class Router {
     }
 
     parseUrl(url: string = '/'): IRouteMatch {
-        if (this.prefix) url = url.replace('/'+this.prefix, '');
         const queryParams = urlToQueryParams(url);
-        const path = url.split('?').shift().replace(/^https?:\/\//, '').replace(this.domain, '');
+        let path = url.split('?').shift().replace(/^https?:\/\//, '').replace(this.domain, '');
+        if (this.prefix) path = path.replace('/'+this.prefix, '');
         const {route, params} = this.parsePath(path);
         return {
             url,

@@ -3,7 +3,7 @@ import React from 'react';
 
 export const App = ({ currentUrl }) =>
     <div id="app">
-        <Router domain="localhost:3333" currentUrl={currentUrl} routes={{
+        <Router domain="localhost:3333" prefix="index" currentUrl={currentUrl} routes={{
             "/": () => <div> Home {Router.getRoute().route}</div>,
             "/article/:article": ({ params }) => <div>article, {params.article} {Router.getRoute().route}</div>,
             "/blog/?article": ({ params }) => <div>blog {params.article}</div>,
