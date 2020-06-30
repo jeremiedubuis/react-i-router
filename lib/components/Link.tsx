@@ -2,7 +2,6 @@ import React from 'react';
 import { Router } from './Router';
 import {withRoute} from '../helpers/withRoute';
 import type {IRouteMatch} from '../Router';
-import {pathPartsParse} from '../helpers/pathPartsParse';
 
 interface ILinkProps {
     activeClassName?: string,
@@ -45,9 +44,8 @@ class _Link extends React.Component<ILinkProps> {
     }
 
     isActive = (): boolean => {
-        if (!this.props.href || !this.props.route.route) return this.props.route.currentPath === '/404' && /^(\/)?404$/.test(this.props.href);
-        const { matches } = pathPartsParse(this.props.href.split('/'), this.props.route.route);
-        return matches;
+        if (!this.props.href || !this.props.route.route) return false;
+        return this.props.href === this.props.route.url;
     }
 }
 
