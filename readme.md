@@ -46,13 +46,26 @@ The Router component needs a domain and currentUrl prop to parse the URL. This a
 Router.set404(({ url, queryParams }) => <div>{url} not found</div>)
 ```
 
+### Router.addListener(event: RouterEvent, cb: Function) / Router.removeListener(event: RouterEvent, cb: Function) 
+> Adds a listener to supported events
+```jsx
+const log = (route) => console.log(route);
+Router.addListener(RouterEvent.Update, log);
+Router.removeListener(RouterEvent.Update, log);
+```
+
 ## Components
 
 ### Link
 ```
-    <Link href="/route">My internal link</Link>;
+    <Link activeClassName="is-active" href="/route">My internal link</Link>;
     <Link href="https://github.com/jeremiedubuis/react-i-router" external>My external link</Link>;
 ```
+
+## Higher Order Components
+
+### withRoute
+The withRoute higher order component passes a route(IRouteMatch) prop to the wrapped component
 
 ## SSR
 

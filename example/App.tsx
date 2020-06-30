@@ -10,9 +10,9 @@ export const App = ({ currentUrl }) =>
             "/queryParam": ({ queryParams }) => <ul>{ Object.keys(queryParams).map(key => <li key={key}>{key}: {queryParams[key]}</li>) }</ul>
         }}/>
 
-        <Link href="/">Home</Link>
-        <button onClick={() => Router.goto('/404')}>404</button>
-        <button onClick={() => Router.goto('/article/1')}>Article 1</button>
+        <Link activeClassName="is-active" href="/">Home</Link>
+        <Link activeClassName="is-active" href="/404">404</Link>
+        <Link activeClassName="is-active" href="/article/1">Article</Link>
         <button onClick={() => Router.goto('/blog')}>Blog </button>
         <button onClick={() => Router.goto('/blog/1')}>Blog 1</button>
         <button onClick={() => Router.goto('/queryParam?param=1&param2')}>Query params</button>

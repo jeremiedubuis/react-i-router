@@ -1,6 +1,6 @@
 import React from 'react';
-import { Router as RouterClass } from '../Router';
-import type { IRoutes, IRouteMatch } from '../router';
+import { Router as RouterClass, RouterEvent } from '../Router';
+import type { IRoutes, IRouteMatch} from '../router';
 
 type tRender404 = (route: IRouteMatch) => any;
 
@@ -32,11 +32,11 @@ export class Router extends React.Component<IRouterProps, IRouterState> {
     }
 
     componentDidMount() {
-        router.addListener('update', this.onUpdate);
+        router.addListener(RouterEvent.Update, this.onUpdate);
     }
 
     componentWillUnmount() {
-        router.removeListener('update', this.onUpdate);
+        router.removeListener(RouterEvent.Update, this.onUpdate);
     }
 
     static addRoute(str: string, renderFunction: Function) {
@@ -55,12 +55,12 @@ export class Router extends React.Component<IRouterProps, IRouterState> {
         return router.route;
     }
 
-    static addListener(event, cb) {
+    static addListener(event: RouterEvent, cb: Function) {
         router.addListener(event, cb);
         return Router;
     }
 
-    static removeListener(event, cb) {
+    static removeListener(event: RouterEvent, cb: Function) {
         router.removeListener(event, cb);
         return Router;
     }

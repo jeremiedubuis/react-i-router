@@ -1,4 +1,5 @@
 import {urlToQueryParams} from './helpers/urlToQueryParams';
+import { pathPartsParse } from './helpers/pathPartsParse';
 
 export interface IRouteObject {
     render: Function
@@ -20,6 +21,10 @@ export interface IRouteMatch {
     match: Function | IRouteObject,
     params: object,
     queryParams: object
+}
+
+export enum RouterEvent {
+    Update = 'update'
 }
 
 export class Router {
@@ -64,32 +69,7 @@ export class Router {
         const pathParts = path.split('/');
         for (let route in this.routes) {
 
-            const routeParts = route.split('/');
-            let params = {};
-            let matches = true;
-
-            for (let i = 0, iLength = pathParts.length; i < iLength; i++) {
-                if (pathParts[i] === routeParts[i]) continue;
-
-                // if mandatory parameter
-                if (/^:/.test(routeParts[i])) {
-                    if (!pathParts[i]) {
-                        matches = false;
-                        break;
-                    } else {
-                        params[routeParts[i].replace(':', '')] = pathParts[i];
-                    }
-                } else if (/^\?/.test(routeParts[i])) {
-                    if (pathParts[i]) params[routeParts[i].replace('?', '')] = pathParts[i];
-                    else {
-                        matches = false;
-                        break;
-                    }
-                } else {
-                    matches = false;
-                    break;
-                }
-            }
+            let { params, matches } = pathPartsParse(pathParts, route);
 
             if (!matches) {
                 params = {};
