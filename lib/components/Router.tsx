@@ -7,6 +7,7 @@ type tRender404 = (route: IRouteMatch) => any;
 interface IRouterProps {
     domain: string,
     currentUrl: string,
+    prefix?: string,
     routes?: IRoutes
 }
 
@@ -24,7 +25,7 @@ export class Router extends React.Component<IRouterProps, IRouterState> {
 
     constructor(props) {
         super(props);
-        router = new RouterClass(props.domain, props.currentUrl, props.routes);
+        router = new RouterClass(props.domain, props.currentUrl, props.prefix, props.routes);
         this.state = {
             route: router.route
         };

@@ -30,12 +30,14 @@ export class Router {
 
     domain: string;
     routes: object;
+    prefix?: string;
     public route: IRouteMatch;
     onUpdateListeners: Function[];
 
-    constructor(domain: string, currentUrl: string, routes: IRoutes = {}) {
+    constructor(domain: string, currentUrl: string, prefix: string, routes: IRoutes = {}) {
         this.domain = domain;
         this.routes = routes;
+        this.prefix = prefix;
         this.onUpdateListeners = [];
 
         this.route = this.parseUrl(currentUrl);
@@ -50,6 +52,7 @@ export class Router {
     }
 
     parseUrl(url: string = '/'): IRouteMatch {
+        if (this.prefix) url = url.replace('/'+this.prefix, '');
         const queryParams = urlToQueryParams(url);
         const path = url.split('?').shift().replace(/^https?:\/\//, '').replace(this.domain, '');
         const {route, params} = this.parsePath(path);
@@ -130,7 +133,7 @@ export class Router {
         const route = this.parseUrl(url);
         if (JSON.stringify(route) !== JSON.stringify(this.route)) {
             this.route = route;
-            history[replace ? 'replaceState' : 'pushState'](null, null, url);
+            history[replace ? 'replaceState' : 'pushState'](null, null, (this.prefix ? '/'+this.prefix : '')+url);
             if (!silent) this.onUpdate();
         }
     };

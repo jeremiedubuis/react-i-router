@@ -11,6 +11,8 @@ $ npm install --save react-i-router
  ```  
   
 The Router component needs a domain and currentUrl prop to parse the URL. This allows the library to work for SSR as well as client side rendering.  
+
+The router can take an optional prefix parameter that you can use to match existing url patterns.
   
 ## Patterns  
   

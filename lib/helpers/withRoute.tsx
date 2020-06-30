@@ -18,7 +18,7 @@ class WithRoute extends React.Component<IWithRouteProps, IWithRouteState> {
         super(props);
         this.state = {
             route: Router.getRoute()
-        }
+        };
     }
     componentDidMount() {
         Router.addListener(RouterEvent.Update, this.onUpdate);

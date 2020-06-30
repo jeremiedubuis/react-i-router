@@ -4,7 +4,8 @@ import ReactDOMServer from 'react-dom/server';
 import { App } from './App';
 import sirv from 'sirv';
 
-const renderApp = (req, res) => {
+const renderApp = (req, res, next) => {
+    if(req.path === '/favicon.ico') return next()
     const html = `<!DOCTYPE html>
         <html lang="en">
         <head>

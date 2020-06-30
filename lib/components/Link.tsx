@@ -45,7 +45,7 @@ class _Link extends React.Component<ILinkProps> {
 
     isActive = (): boolean => {
         if (!this.props.href || !this.props.route.route) return false;
-        return this.props.href === this.props.route.url;
+        return this.props.href === this.props.route.currentPath;
     }
 }
 
